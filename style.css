@@ -33,6 +33,7 @@ body {
     --coral: #fabbab;
     --white: #F2F5FF;
     --blue: rgb(71, 121, 152);
+    --light-blue: rgba(71, 121, 152, 0.6);
     --yellow: rgb(250, 243, 162);
     --black: rgb(49, 48, 46);
 }
@@ -42,6 +43,7 @@ body {
 
 body {
     background-color: var(--white);
+    cursor: default;
 }
 
 header {
@@ -78,7 +80,7 @@ footer {
 }
 
 .v-separator {
-    background-color: rgba(71, 121, 152, 0.6);
+    background-color: var(--light-blue);
     flex: 0 0 1px;
 }
 
@@ -128,10 +130,15 @@ button {
     box-shadow: 0px 4px 8px 4px rgba(71, 121, 152, 0.1);
     border: none;
     background-color: inherit;
+    cursor: pointer;
 }
 button:hover {
     box-shadow: 0px 4px 8px 4px rgba(71, 121, 152, 0.2);
     color: var(--black);
+}
+button:active {
+    color: var(--light-blue);
+    box-shadow: none;
 }
 
 #button-0 {
@@ -166,9 +173,13 @@ button:hover {
     gap: 12px;
     padding: 20px;
     text-align: end;
-    color: var(--blue);
+    color: var(--light-blue);
     font-style: italic;
     font-weight: 300;
+    transition: all 120ms;
+}
+.latest, .verbose-display>p:hover {
+    color: var(--blue);
 }
 
 .display-top, .display-middle, .display-bottom {
