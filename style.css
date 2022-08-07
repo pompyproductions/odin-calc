@@ -1,0 +1,25 @@
+/* boilerplate start */
+
+html {
+    box-sizing: border-box;
+    overflow: hidden;
+} *, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+} h1, h2, h3, p {
+    margin: 0;
+} a {
+    text-decoration: none;
+    color: inherit;
+} a:hover {
+    text-decoration: underline;
+} ul, ol {
+    list-style: none;
+}
+
+/* boilerplate end */
