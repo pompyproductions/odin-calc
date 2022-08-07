@@ -7,6 +7,6 @@ const operations = {
     divide: (x, y) => y === 0 ? "ERR" : (x/y)
 }
 
-console.log(operations.divide(7,3).toFixed(3));
-console.log(operations.divide(8,3).toFixed(3));
+// console.log(operations.divide(7,3).toFixed(3));
+// console.log(operations.divide(8,3).toFixed(3));
 
