@@ -23,6 +23,10 @@
 <body>
     <header>
         <a class="logo">Verbose Calculator</a>
+        <nav>
+            <a href="">About</a>
+            <a href="">Help</a>
+        </nav>
     </header>
     <div class="main-container">
         <div class="verbose-display">
@@ -34,9 +38,35 @@
         </div>
         <div class="v-separator"></div>
         <div class="calculator-buttons">
-            <p>TBD</p>
+            <div class="others">
+                <button class="other" id="button-enter">Enter</button>
+                <button class="other">C</button>
+            </div>
+            <div class="numbers">
+                <button class="number">7</button>
+                <button class="number">8</button>
+                <button class="number">9</button>
+                <button class="number">4</button>
+                <button class="number">5</button>
+                <button class="number">6</button>
+                <button class="number">1</button>
+                <button class="number">2</button>
+                <button class="number">3</button>
+                <button class="number" id="button-0">0</button>
+                <button class="number">.</button>
+            </div>
+            <div class="operators">
+                <button class="operator">&plus;</button>
+                <button class="operator">&minus;</button>
+                <button class="operator">&times;</button>
+                <button class="operator">&divide;</button>
+            </div>
         </div>
-        <div class="calculator-display"></div>
+        <div class="calculator-display">
+            <p class="display-top">1250</p>
+            <p class="display-middle">&times;</p>
+            <p class="display-bottom display-focus">45214.3434</p>
+        </div>
     </div>
     <footer>
         <p>Made by Pompy Productions.</p>
