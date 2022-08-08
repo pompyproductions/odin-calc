@@ -1,7 +1,7 @@
 console.log("main.js: flotation device");
 
 function updateDisplay() {
-    if (!currentNumber) {
+    if (!currentNumber && !firstOperand) {
         currentDisplay.textContent = "";
     } else {
         currentDisplay.textContent = currentNumber.toString()
@@ -13,7 +13,6 @@ const appendNumber = function(event) {
     if (currentOperation && currentDisplay.classList.contains("display-middle")) {
         currentDisplay.classList.remove("display-focus");
         currentDisplay = document.querySelector(".display-bottom");
-        console.log(currentDisplay);
         currentDisplay.classList.add("display-focus");
     }
     if (event.target.value === ".") {
@@ -24,9 +23,7 @@ const appendNumber = function(event) {
     }
 }
 
-const setOperation = function(event) {
-
-    
+const setOperation = function(event) {    
     if (!firstOperand) {
         // don't do anything when calculator is empty
         if (currentNumber === 0) {return};
@@ -60,7 +57,7 @@ const resetCalculator = function(event) {
 }
 
 const applyOperation = function(event) {
-    console.log("");
+    console.log(`${firstOperand} ${currentOperation} ${currentNumber}`);
 }
 
 // const switchDisplay = function(next) {
