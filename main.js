@@ -83,6 +83,8 @@ const resetCalculator = function() {
     currentNumber = 0;
     currentOperation = null;
     firstOperand = null;
+    memory.reset();
+    updateDisplay();
 }
 
 // const switchDisplay = function(next) {
