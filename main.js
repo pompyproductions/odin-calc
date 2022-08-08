@@ -12,6 +12,12 @@ function switchDisplay(to) {
     currentDisplay = document.querySelector(to);
     currentDisplay.classList.add("display-focus");
 } 
+function resetDisplay() {
+    switchDisplay(".display-middle");
+    document.querySelector(".display-top").textContent = "";
+    document.querySelector(".display-bottom").textContent = "";
+}
+
 
 const appendNumber = function(event) {
     
@@ -30,6 +36,7 @@ const appendNumber = function(event) {
         updateDisplay();
     }
 }
+
 
 const setOperation = function(event) {    
     if (!firstOperand) {
@@ -59,11 +66,13 @@ const setOperation = function(event) {
     currentOperation = event.target.value;
 }
 
+
 const resetDisplay = function() {
     switchDisplay(".display-middle");
     document.querySelector(".display-top").textContent = "";
     document.querySelector(".display-bottom").textContent = "";
 }
+
 
 const applyOperation = function(event) {
     if (!currentOperation || !currentNumber) {return};
@@ -114,11 +123,13 @@ document.querySelectorAll(".operator").forEach(btn =>
 document.getElementById("button-enter").addEventListener("click", applyOperation);
 document.getElementById("button-reset").addEventListener("click", resetCalculator);
 
+
+
 // debugging
 
-document.getElementById("button-7").click();
-for (let i=0; i < 5; i++) {
-    document.getElementById("button-add").click();
-    document.getElementById("button-7").click();
-    document.getElementById("button-enter").click();
-}
+// document.getElementById("button-7").click();
+// for (let i=0; i < 5; i++) {
+//     document.getElementById("button-add").click();
+//     document.getElementById("button-7").click();
+//     document.getElementById("button-enter").click();
+// }
