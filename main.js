@@ -1,7 +1,7 @@
 console.log("main.js: flotation device");
 
 function updateDisplay() {
-    if (currentNumber === 0) {
+    if (!currentNumber) {
         currentDisplay.textContent = "";
     } else {
         currentDisplay.textContent = currentNumber.toString()
@@ -10,6 +10,12 @@ function updateDisplay() {
 }
 
 const appendNumber = function(event) {
+    if (currentOperation && currentDisplay.classList.contains("display-middle")) {
+        currentDisplay.classList.remove("display-focus");
+        currentDisplay = document.querySelector(".display-bottom");
+        console.log(currentDisplay);
+        currentDisplay.classList.add("display-focus");
+    }
     if (event.target.value === ".") {
         console.log(". function TBD");
     } else {
@@ -19,14 +25,18 @@ const appendNumber = function(event) {
 }
 
 const setOperation = function(event) {
-    if (currentNumber === 0) {return};
-    if (!operands[0]) {
-        operands[0] = currentNumber;
+
+    
+    if (!firstOperand) {
+        // don't do anything when calculator is empty
+        if (currentNumber === 0) {return};
+        
+        // otherwise apply the first operand and reset current
+        firstOperand = currentNumber;
         currentNumber = 0;
-        document.querySelector(".display-top").classList.remove("display-focus");
-        document.querySelector(".display-top").textContent = operands[0].toString();
+        document.querySelector(".display-top").textContent = firstOperand.toString();
     };
-    console.log(event.target.value);
+
     switch (event.target.value) {
         case "add":
             document.querySelector(".display-middle").innerHTML = "&plus;";
@@ -59,11 +69,12 @@ const applyOperation = function(event) {
 //     currentDisplay.classList.add("display-focus");
 // }
 
-let operands = [null, null]; // -1 means unset
-let currentOperation = "";
+let firstOperand = null; // null means unset
+let currentOperation = null;
 let currentNumber = 0;
 let currentDisplay = document.querySelector(".display-middle");
 currentDisplay.classList.add("display-focus");
+
 
 document.querySelectorAll(".number").forEach(btn =>
     btn.addEventListener("click", appendNumber));
