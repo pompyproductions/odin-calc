@@ -8,9 +8,9 @@
 
     <!-- boilerplate: css and js -->
     <script>console.log("html head: floatation device")</script>
-    <script src="main.js" defer></script>
     <script src="operations.js" defer></script>
     <script src="verbose.js" defer></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css">
 
     <!-- boilerplate: font imports  -->
@@ -35,14 +35,14 @@
         <div class="v-separator"></div>
         <div class="calculator-buttons">
             <div class="operators">
-                <button class="operator" value="add">&plus;</button>
+                <button class="operator" id="button-add" value="add">&plus;</button>
                 <button class="operator" value="subtract">&minus;</button>
                 <button class="operator" value="multiply">&times;</button>
                 <button class="operator" value="divide">&divide;</button>
             </div>
             
             <div class="numbers">
-                <button class="number" value="7">7</button>
+                <button class="number" id="button-7" value="7">7</button>
                 <button class="number" value="8">8</button>
                 <button class="number" value="9">9</button>
                 <button class="number" value="4">4</button>

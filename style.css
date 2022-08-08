@@ -189,7 +189,7 @@ button:active {
 }
 
 .verbose-element {
-    transition: all 160ms;
+    transition: all 200ms;
     cursor: pointer;
 }
 .latest, .verbose-display>p:hover {
@@ -206,4 +206,7 @@ button:active {
     font-size: 2em;
     color: var(--black);
     font-weight: 800;
+}
+.faded {
+    color: rgba(71, 121, 152, 0.3);
 }

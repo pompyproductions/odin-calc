@@ -59,6 +59,12 @@ const setOperation = function(event) {
     currentOperation = event.target.value;
 }
 
+const resetDisplay = function() {
+    switchDisplay(".display-middle");
+    document.querySelector(".display-top").textContent = "";
+    document.querySelector(".display-bottom").textContent = "";
+}
+
 const applyOperation = function(event) {
     if (!currentOperation || !currentNumber) {return};
 
@@ -71,18 +77,18 @@ const applyOperation = function(event) {
     currentOperation = null;
     firstOperand = null;
     
-    switchDisplay(".display-middle");
-    document.querySelector(".display-top").textContent = "";
-    document.querySelector(".display-bottom").textContent = "";
+    resetDisplay();
     
     willReset = true;
     updateDisplay();
 }
 
+
 const resetCalculator = function() {
     currentNumber = 0;
     currentOperation = null;
     firstOperand = null;
+    
     memory.reset();
     updateDisplay();
 }
@@ -107,3 +113,12 @@ document.querySelectorAll(".operator").forEach(btn =>
     btn.addEventListener("click", setOperation));
 document.getElementById("button-enter").addEventListener("click", applyOperation);
 document.getElementById("button-reset").addEventListener("click", resetCalculator);
+
+// debugging
+
+document.getElementById("button-7").click();
+for (let i=0; i < 5; i++) {
+    document.getElementById("button-add").click();
+    document.getElementById("button-7").click();
+    document.getElementById("button-enter").click();
+}
