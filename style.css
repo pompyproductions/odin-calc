@@ -123,12 +123,12 @@ footer {
 .operators {
     grid-template-rows: repeat(2, 40px);
     grid-template-columns: repeat(2, 68px);
-    background-color: var(--yellow);
+    background-color: var(--coral);
 }
 .others {
     grid-template-rows: repeat(1, 40px);
     grid-template-columns: repeat(3, 40px);
-    background-color: var(--coral);
+    background-color: var(--yellow);
 }
 
 button {
@@ -156,7 +156,7 @@ button:active {
 }
 
 .operator {
-    background-color: var(--yellow);
+    background-color: inherit;
     color: var(--blue);
     font-size: 1.2rem;
     font-weight: 500;
@@ -164,7 +164,7 @@ button:active {
 }
 
 .other {
-    background-color: var(--coral);
+    background-color: inherit;
     color: var(--blue);
     font-weight: 500;
     box-shadow: 0px 4px 8px 4px rgba(71, 121, 152, 0.12);
