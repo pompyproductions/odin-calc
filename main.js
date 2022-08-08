@@ -62,6 +62,10 @@ const setOperation = function(event) {
 
 const applyOperation = function(event) {
     if (!currentOperation || !currentNumber) {return};
+
+    memory.newOperation([firstOperand, currentNumber, currentOperation]);
+    console.log(memory.history);
+
     currentNumber = operations[currentOperation](firstOperand, currentNumber);
     currentOperation = null;
     firstOperand = null;
