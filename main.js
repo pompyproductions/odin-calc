@@ -102,12 +102,6 @@ const resetCalculator = function() {
     updateDisplay();
 }
 
-// const switchDisplay = function(next) {
-//     currentDisplay.classList.remove("display-focus");
-//     currentDisplay = document.querySelector(next);
-//     currentDisplay.classList.add("display-focus");
-// }
-
 let willReset = false;
 let firstOperand = null; // null means unset
 let currentOperation = null;
@@ -122,14 +116,3 @@ document.querySelectorAll(".operator").forEach(btn =>
     btn.addEventListener("click", setOperation));
 document.getElementById("button-enter").addEventListener("click", applyOperation);
 document.getElementById("button-reset").addEventListener("click", resetCalculator);
-
-
-
-// debugging
-
-// document.getElementById("button-7").click();
-// for (let i=0; i < 5; i++) {
-//     document.getElementById("button-add").click();
-//     document.getElementById("button-7").click();
-//     document.getElementById("button-enter").click();
-// }
