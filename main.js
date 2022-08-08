@@ -116,6 +116,31 @@ document.querySelectorAll(".operator").forEach(btn =>
 document.getElementById("button-enter").addEventListener("click", applyOperation);
 document.getElementById("button-reset").addEventListener("click", resetCalculator);
 
+document.addEventListener('keydown', (event) => {
+    console.log(event.key);
+    if (!isNaN(event.key)) {
+        document.querySelector(".numbers")
+            .querySelector(`[value="${event.key}"]`)
+            .click();
+    } else if ("+-*/".includes(event.key)) {
+        document.querySelector(".operators")
+            .querySelector(`[value="${inputs[event.key]}"]`)
+            .click();
+    } else if ("EnterEscape".includes(event.key)) {
+        document.querySelector(".others")
+            .querySelector(`#${inputs[event.key]}`)
+            .click();
+    }
+});
+
+const inputs = {
+    "+": "add",
+    "-": "subtract",
+    "*": "multiply",
+    "/": "divide",
+    "Enter": "button-enter",
+    "Escape": "button-reset"
+}
 
 
 // debugging
