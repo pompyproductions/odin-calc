@@ -6,7 +6,6 @@ function updateDisplay() {
     } else {
         currentDisplay.textContent = currentNumber.toString()
     };
-    console.log(currentNumber);
 }
 function switchDisplay(to) {
     currentDisplay.classList.remove("display-focus");
@@ -63,17 +62,19 @@ const setOperation = function(event) {
 const applyOperation = function(event) {
     if (!currentOperation || !currentNumber) {return};
 
-    memory.newOperation([firstOperand, currentNumber, currentOperation]);
-    console.log(memory.history);
-
-    currentNumber = operations[currentOperation](firstOperand, currentNumber);
+    let arr = [firstOperand, currentNumber, currentOperation];
+    memory.newOperation(arr);
+    currentNumber = memory.evaluate(arr);
+    verboseDisplay.create(arr);
+    // catch eventual error statements (e.g. "ERR01") here with switch/case
+    
     currentOperation = null;
     firstOperand = null;
-
+    
     switchDisplay(".display-middle");
     document.querySelector(".display-top").textContent = "";
     document.querySelector(".display-bottom").textContent = "";
-
+    
     willReset = true;
     updateDisplay();
 }

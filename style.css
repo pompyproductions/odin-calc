@@ -187,6 +187,11 @@ button:active {
     font-weight: 300;
     transition: all 120ms;
 }
+
+.verbose-element {
+    transition: all 160ms;
+    cursor: pointer;
+}
 .latest, .verbose-display>p:hover {
     color: var(--blue);
 } /* apply latest to new verbose AFTER attaching to DOM*/ 
