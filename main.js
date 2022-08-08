@@ -8,13 +8,22 @@ function updateDisplay() {
     };
     console.log(currentNumber);
 }
+function switchDisplay(to) {
+    currentDisplay.classList.remove("display-focus");
+    currentDisplay = document.querySelector(to);
+    currentDisplay.classList.add("display-focus");
+} 
 
 const appendNumber = function(event) {
+    
     if (currentOperation && currentDisplay.classList.contains("display-middle")) {
-        currentDisplay.classList.remove("display-focus");
-        currentDisplay = document.querySelector(".display-bottom");
-        currentDisplay.classList.add("display-focus");
+        switchDisplay(".display-bottom");
     }
+    if (willReset) {
+        currentNumber = 0;
+        willReset = false;
+    }
+
     if (event.target.value === ".") {
         console.log(". function TBD");
     } else {
@@ -51,13 +60,24 @@ const setOperation = function(event) {
     currentOperation = event.target.value;
 }
 
-const resetCalculator = function(event) {
-    currentNumber = 0;
+const applyOperation = function(event) {
+    if (!currentOperation || !currentNumber) {return};
+    currentNumber = operations[currentOperation](firstOperand, currentNumber);
+    currentOperation = null;
+    firstOperand = null;
+
+    switchDisplay(".display-middle");
+    document.querySelector(".display-top").textContent = "";
+    document.querySelector(".display-bottom").textContent = "";
+
+    willReset = true;
     updateDisplay();
 }
 
-const applyOperation = function(event) {
-    console.log(`${firstOperand} ${currentOperation} ${currentNumber}`);
+const resetCalculator = function() {
+    currentNumber = 0;
+    currentOperation = null;
+    firstOperand = null;
 }
 
 // const switchDisplay = function(next) {
@@ -66,6 +86,7 @@ const applyOperation = function(event) {
 //     currentDisplay.classList.add("display-focus");
 // }
 
+let willReset = false;
 let firstOperand = null; // null means unset
 let currentOperation = null;
 let currentNumber = 0;

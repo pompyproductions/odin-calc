@@ -189,7 +189,7 @@ button:active {
 }
 .latest, .verbose-display>p:hover {
     color: var(--blue);
-}
+} /* apply latest to new verbose AFTER attaching to DOM*/ 
 
 .display-top, .display-middle, .display-bottom {
     color: rgba(71, 121, 152, 0.6);
