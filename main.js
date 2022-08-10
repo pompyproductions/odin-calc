@@ -18,6 +18,10 @@ function resetDisplay() {
     document.querySelector(".display-bottom").textContent = "";
 }
 
+function addDecimal() {
+    console.log("tbd");
+}
+
 
 const appendNumber = function(event) {
     
@@ -30,7 +34,7 @@ const appendNumber = function(event) {
     }
 
     if (event.target.value === ".") {
-        console.log(". function TBD");
+        addDecimal();
     } else {
         currentNumber = currentNumber * 10 + Number(event.target.value);
         updateDisplay();
@@ -99,6 +103,7 @@ let willReset = false;
 let firstOperand = null; // null means unset
 let currentOperation = null;
 let currentNumber = 0;
+let currentDecimal = null;
 let currentDisplay = document.querySelector(".display-middle");
 currentDisplay.classList.add("display-focus");
 
@@ -111,7 +116,7 @@ document.getElementById("button-enter").addEventListener("click", applyOperation
 document.getElementById("button-reset").addEventListener("click", resetCalculator);
 
 document.addEventListener('keydown', (event) => {
-    console.log(event.key);
+    // console.log(event.key);
     if (!isNaN(event.key)) {
         document.querySelector(".numbers")
             .querySelector(`[value="${event.key}"]`)
@@ -124,6 +129,10 @@ document.addEventListener('keydown', (event) => {
         document.querySelector(".others")
             .querySelector(`#${inputs[event.key]}`)
             .click();
+    } else if (".,".includes(event.key)) {
+        document.querySelector(".numbers")
+            .querySelector(`#${inputs[event.key]}`)
+            .click();
     }
 });
 
@@ -133,5 +142,6 @@ const inputs = {
     "*": "multiply",
     "/": "divide",
     "Enter": "button-enter",
-    "Escape": "button-reset"
+    "Escape": "button-reset",
+    ".": "button-decimal"
 }
