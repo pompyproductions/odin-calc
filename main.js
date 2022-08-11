@@ -3,23 +3,20 @@ console.log("main.js: flotation device");
 function updateDisplay() {
     if (!currentNumber && !firstOperand) {
         currentDisplay.textContent = "";
+    } else if (currentDecimal > -1) {
+        currentDisplay.textContent = `${Math.floor(currentNumber / Math.pow(10, currentDecimal))}.${currentNumber % Math.pow(10, currentDecimal)}`
     } else {
-        currentDisplay.textContent = currentNumber.toString()
+        currentDisplay.textContent = currentNumber.toString();
     };
-}
-function switchDisplay(to) {
-    currentDisplay.classList.remove("display-focus");
-    currentDisplay = document.querySelector(to);
-    currentDisplay.classList.add("display-focus");
-} 
-function resetDisplay() {
-    switchDisplay(".display-middle");
-    document.querySelector(".display-top").textContent = "";
-    document.querySelector(".display-bottom").textContent = "";
+// 12345.678:
+// currentDecimal = 3
+// `${Math.floor(12345678 / Math.pow(10, currentDecimal))}.${12345678 % Math.pow(10, currentDecimal)}`
+
+
 }
 
 function addDecimal() {
-    console.log("tbd");
+    currentDecimal += 1;
 }
 
 
@@ -33,11 +30,15 @@ const appendNumber = function(event) {
         willReset = false;
     }
 
-    if (event.target.value === ".") {
+    if (event.target.value === "." && currentDecimal === -1) {
         addDecimal();
     } else {
         currentNumber = currentNumber * 10 + Number(event.target.value);
+        if (currentDecimal >= 0) addDecimal();
         updateDisplay();
+        console.log(currentDecimal === -1 ? 
+            currentNumber : 
+            `${currentNumber} / ${Math.pow(10, currentDecimal)}`);
     }
 }
 
@@ -103,7 +104,7 @@ let willReset = false;
 let firstOperand = null; // null means unset
 let currentOperation = null;
 let currentNumber = 0;
-let currentDecimal = null;
+let currentDecimal = -1; // -1 means unset
 let currentDisplay = document.querySelector(".display-middle");
 currentDisplay.classList.add("display-focus");
 
