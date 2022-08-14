@@ -10,27 +10,35 @@ const inputs = {
     ".": "button-decimal",
 }
 
-function areArraysEqual(arr1, arr2) {
-    if (arr1.length !== arr2.length) return false;
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) return false;
-    } return true;
-}
+// function areArraysEqual(arr1, arr2) {
+//     if (arr1.length !== arr2.length) return false;
+//     for (let i = 0; i < arr1.length; i++) {
+//         if (arr1[i] !== arr2[i]) return false;
+//     } return true;
+// }
 
 function onDigitClick(ev) {
     console.log(ev.target);
+    calculator.append(Number(ev.target.value));
+    numDisplay.update();
 }
 
 function onOperatorClick(ev) {
+    // can definitely write the conditionals better
     console.log(ev.target);
-    if (!calculator.operand && calculator.current === [0, -1]) {
+    if (!calculator.operand && calculator.currentWhole === 0 && !calculator.currentDecimal) {
         if (ev.target.value === "subtract") {
-            console.log("make it negative");
+            calculator.isNegative = true;
+            numDisplay.update();
         } else if (ev.target.value === "add") {
-            console.log("make it positive");
-        }
+            calculator.isNegative = false;
+            numDisplay.update();
+        };
+    } else if (!calculator.operand && !areArraysEqual(calculator.current, [0, -1])) {
+        calculator.setOperand(calculator.current); // could transfer into setOperator without parameter
+        calculator.setOperator(ev.target.value);
+        // adjust the displays here
     }
-    // if (calculator.current === [0, -1])
 }
 
 function onSubmitClick(ev) {

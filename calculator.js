@@ -10,13 +10,15 @@ let numDisplay = {
     current: document.querySelector(".display-middle"),
 
 
-    update: (arr) => {
-        if (arr[1] > 0) {
-            numDisplay.current.textContent = (arr[0] >= 0) ?
-            `${Math.floor(arr[0] / Math.pow(10, arr[1]))}.${arr[0] % Math.pow(10, arr[1])}` :
-            `${Math.ceil(arr[0] / Math.pow(10, arr[1]))}.${(arr[0]*-1) % Math.pow(10, arr[1])}`;
+    update: () => {
+        if (calculator.currentWhole === 0 && !calculator.currentDecimal) {
+            numDisplay.current.textContent = `\
+            ${calculator.isNegative ? "-" : ""}`;
         } else {
-            numDisplay.current.textContent = `${arr[0]}`;
+            numDisplay.current.textContent = `\
+            ${calculator.isNegative ? "-" : ""}\
+            ${calculator.currentWhole}\
+            ${calculator.currentDecimal ? `.${calculator.currentDecimal}` : ""}`
         }
     },
     focus: (val) => {
@@ -28,25 +30,41 @@ let numDisplay = {
         numDisplay.container.forEach(elem => {elem.textContent = "";});
         numDisplay.focus(1);
     }
+
+    // update: (arr) => {
+    //     if (arr[1] > 0) {
+    //         numDisplay.current.textContent = (arr[0] >= 0) ?
+    //         `${Math.floor(arr[0] / Math.pow(10, arr[1]))}.${arr[0] % Math.pow(10, arr[1])}` :
+    //         `${Math.ceil(arr[0] / Math.pow(10, arr[1]))}.${(arr[0]*-1) % Math.pow(10, arr[1])}`;
+    //     } else {
+    //         numDisplay.current.textContent = `${arr[0]}`;
+    //     }
+    // },
 }
 
 let calculator = {
+
     isNegative: false,
-    willReset: false,
+    currentWhole: 0,
+    currentDecimal: null,
+
     operand: null, // set only first operand, second is submitted directly from current
     operator: null,
-    current: [0, -1],
+    
+    willReset: false,
 
 
     append: (digit) => {
-        if (current[0] >= 0) {
-            current[0] = current[0] * 10 + digit;
+        if (!calculator.currentDecimal) {
+            calculator.currentWhole = calculator.currentWhole * 10 + digit;
         } else {
-            current[0] = current[0] * 10 - digit;
-        };
-        if (current[1] > -1) {current[1]++};
+            calculator.currentDecimal = calculator.currentDecimal * 10 + digit;
+        }
     },
-    setOperand: (val) => {calculator.operand = val},
+    setOperand: (val) => {
+        calculator.operand = val;
+        calculator.current = [0, -1];
+    },
     setOperator: (val) => {
         if (!operand && current === [0, -1]) { // no operand or anything
             if (val === "-" && !isNegative) {
