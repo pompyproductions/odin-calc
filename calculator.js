@@ -31,27 +31,59 @@ let numDisplay = {
 }
 
 let calculator = {
+    isNegative: false,
     willReset: false,
     operand: null, // set only first operand, second is submitted directly from current
     operator: null,
     current: [0, -1],
 
+
+    append: (digit) => {
+        if (current[0] >= 0) {
+            current[0] = current[0] * 10 + digit;
+        } else {
+            current[0] = current[0] * 10 - digit;
+        };
+        if (current[1] > -1) {current[1]++};
+    },
     setOperand: (val) => {calculator.operand = val},
     setOperator: (val) => {
-        calculator.operator = val;
-        switch (val) {
-            case "add":
-                document.querySelector(".display-middle").innerHTML = "&plus;";
-                break;
-            case "subtract":
-                document.querySelector(".display-middle").innerHTML = "&minus;";
-                break;
-            case "multiply":
-                document.querySelector(".display-middle").innerHTML = "&times;";
-                break;
-            case "divide":
-                document.querySelector(".display-middle").innerHTML = "&divide;";
-                break;
+        if (!operand && current === [0, -1]) { // no operand or anything
+            if (val === "-" && !isNegative) {
+                isNegative = true;
+                numDisplay.update();
+            };
         }
+        // } else if () {
+
+        // }
+        calculator.operator = val;
+        // switch (val) {
+        //     case "add":
+        //         document.querySelector(".display-middle").innerHTML = "&plus;";
+        //         break;
+        //     case "subtract":
+        //         document.querySelector(".display-middle").innerHTML = "&minus;";
+        //         break;
+        //     case "multiply":
+        //         document.querySelector(".display-middle").innerHTML = "&times;";
+        //         break;
+        //     case "divide":
+        //         document.querySelector(".display-middle").innerHTML = "&divide;";
+        //         break;
+        // }
     },
+    reset: () => {
+        currentNumber = 0;
+        currentOperation = null;
+        firstOperand = null;
+        
+        memory.reset();
+        updateDisplay();
+    },
+    submitOperation: () => {console.log([
+        calculator.operand,
+        calculator.current,
+        calculator.operator
+    ])},
 }
