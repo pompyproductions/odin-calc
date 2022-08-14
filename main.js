@@ -18,7 +18,10 @@ const inputs = {
 // }
 
 function onDigitClick(ev) {
-    console.log(ev.target);
+    if (ev.target.value === ".") {
+        if (calculator.currentDecimal == null) calculator.currentDecimal = 0;
+        return;
+    }
     calculator.append(Number(ev.target.value));
     numDisplay.update();
 }
@@ -40,7 +43,7 @@ function onOperatorClick(ev) {
         // adjust the displays here
     }
 }
-
+``
 function onSubmitClick(ev) {
     console.log(ev.target);
 }

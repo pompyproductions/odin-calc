@@ -55,7 +55,7 @@ let calculator = {
 
 
     append: (digit) => {
-        if (!calculator.currentDecimal) {
+        if (calculator.currentDecimal == null) {
             calculator.currentWhole = calculator.currentWhole * 10 + digit;
         } else {
             calculator.currentDecimal = calculator.currentDecimal * 10 + digit;
