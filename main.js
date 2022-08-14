@@ -10,6 +10,39 @@ const inputs = {
     ".": "button-decimal",
 }
 
+function areArraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    } return true;
+}
+
+function onDigitClick(ev) {
+    console.log(ev.target);
+}
+
+function onOperatorClick(ev) {
+    console.log(ev.target);
+    if (!calculator.operand && calculator.current === [0, -1]) {
+        if (ev.target.value === "subtract") {
+            console.log("make it negative");
+        } else if (ev.target.value === "add") {
+            console.log("make it positive");
+        }
+    }
+    // if (calculator.current === [0, -1])
+}
+
+function onSubmitClick(ev) {
+    console.log(ev.target);
+}
+
+function onResetClick(ev) {
+    console.log(ev.target);
+}
+
+
+
 // const applyOperation = function(event) {
 //     if (!currentOperation || !currentNumber) {return};
 
