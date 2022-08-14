@@ -12,13 +12,13 @@ let numDisplay = {
 
     update: () => {
         if (calculator.currentWhole === 0 && !calculator.currentDecimal) {
-            numDisplay.current.textContent = `\
-            ${calculator.isNegative ? "-" : ""}`;
+            numDisplay.current.textContent = `${calculator.isNegative ? "–" : ""}`;
         } else {
-            numDisplay.current.textContent = `\
-            ${calculator.isNegative ? "-" : ""}\
-            ${calculator.currentWhole}\
-            ${calculator.currentDecimal ? `.${calculator.currentDecimal}` : ""}`
+            numDisplay.current.textContent = [
+                `${calculator.isNegative ? "–" : ""}`,
+                `${calculator.currentWhole}`,
+                `${calculator.currentDecimal ? `.${calculator.currentDecimal}` : ""}`
+            ].join("");
         }
     },
     focus: (val) => {
