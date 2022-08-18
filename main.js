@@ -25,6 +25,7 @@ function onDigitClick(ev) {
     }
     calculator.append(Number(ev.target.value));
     numDisplay.update();
+    console.log(calculator);
 }
 
 function onOperatorClick(ev) {

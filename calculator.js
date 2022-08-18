@@ -117,4 +117,17 @@ let calculator = {
         calculator.current,
         calculator.operator
     ])},
+    packNumber: () => {
+        let packedNum = calculator.current;
+        if (calculator.isNegative) {
+            packedNum *= -1
+        };
+        if (calculator.decimalPoint !== -1) {
+            packedNum /= Math.pow(10, calculator.decimalPoint)
+        };
+        return [
+            packedNum,
+            calculator.decimalPoint === -1 ? 0 : calculator.decimalPoint
+        ]
+    }
 }
