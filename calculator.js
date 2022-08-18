@@ -11,14 +11,24 @@ let numDisplay = {
 
 
     update: () => {
-        if (calculator.currentWhole === 0 && !calculator.currentDecimal) {
+        if (!calculator.current) {
             numDisplay.current.textContent = `${calculator.isNegative ? "–" : ""}`;
-        } else {
+        } else if (calculator.decimalPoint === -1) {
             numDisplay.current.textContent = [
                 `${calculator.isNegative ? "–" : ""}`,
-                `${calculator.currentWhole}`,
-                `${calculator.currentDecimal ? `.${calculator.currentDecimal}` : ""}`
+                `${calculator.current}`
             ].join("");
+        } else {
+            let arr = [
+                `${calculator.isNegative ? "–" : ""}`,
+                `${Math.floor(calculator.current / Math.pow(10, calculator.decimalPoint))}`,
+                ".",
+                `${"0".repeat(calculator.zerosAfterDecimalPoint)}`
+            ];
+            if (calculator.current % Math.pow(10, calculator.decimalPoint)) {
+                arr.push(`${calculator.current % Math.pow(10, calculator.decimalPoint)}`);
+            };
+            numDisplay.current.textContent = arr.join("");
         }
     },
     focus: (val) => {
@@ -45,8 +55,9 @@ let numDisplay = {
 let calculator = {
 
     isNegative: false,
-    currentWhole: 0,
-    currentDecimal: null,
+    decimalPoint: -1,
+    current: 0,
+    zerosAfterDecimalPoint: 0,
 
     operand: null, // set only first operand, second is submitted directly from current
     operator: null,
@@ -55,10 +66,12 @@ let calculator = {
 
 
     append: (digit) => {
-        if (calculator.currentDecimal == null) {
-            calculator.currentWhole = calculator.currentWhole * 10 + digit;
-        } else {
-            calculator.currentDecimal = calculator.currentDecimal * 10 + digit;
+        calculator.current = calculator.current * 10 + digit;
+        if (calculator.decimalPoint !== -1) {
+            calculator.decimalPoint++;
+            if (digit === 0 && !(calculator.current % Math.pow(10, calculator.decimalPoint))) {
+                calculator.zerosAfterDecimalPoint++;
+            }
         }
     },
     setOperand: (val) => {

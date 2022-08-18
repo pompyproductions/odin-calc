@@ -19,7 +19,8 @@ const inputs = {
 
 function onDigitClick(ev) {
     if (ev.target.value === ".") {
-        if (calculator.currentDecimal == null) calculator.currentDecimal = 0;
+        if (calculator.decimalPoint === -1) calculator.decimalPoint = 0;
+        numDisplay.update();
         return;
     }
     calculator.append(Number(ev.target.value));
@@ -29,7 +30,7 @@ function onDigitClick(ev) {
 function onOperatorClick(ev) {
     // can definitely write the conditionals better
     console.log(ev.target);
-    if (!calculator.operand && calculator.currentWhole === 0 && !calculator.currentDecimal) {
+    if (!calculator.operand && !calculator.current) {
         if (ev.target.value === "subtract") {
             calculator.isNegative = true;
             numDisplay.update();
@@ -37,7 +38,7 @@ function onOperatorClick(ev) {
             calculator.isNegative = false;
             numDisplay.update();
         };
-    } else if (!calculator.operand && !areArraysEqual(calculator.current, [0, -1])) {
+    } else if (!calculator.operand && calculator.current) {
         calculator.setOperand(calculator.current); // could transfer into setOperator without parameter
         calculator.setOperator(ev.target.value);
         // adjust the displays here
