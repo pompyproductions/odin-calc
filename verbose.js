@@ -78,8 +78,8 @@ let memory = {
         memory.pointer = -1;
         verboseDisplay.regen();
     },
-    
-    newOperation: (arr) => {
+
+    append: (arr) => {
         if (memory.history.length > 0) {
             if (arr[0] !== memory.evaluate(memory.history[memory.pointer])) {
                 memory.pointer = -1

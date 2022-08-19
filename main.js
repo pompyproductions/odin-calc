@@ -18,6 +18,9 @@ const inputs = {
 // }
 
 function onDigitClick(ev) {
+    if (calculator.operator) {
+        numDisplay.focus(2);
+    }
     if (ev.target.value === ".") {
         if (calculator.decimalPoint === -1) calculator.decimalPoint = 0;
         numDisplay.update();
@@ -39,11 +42,16 @@ function onOperatorClick(ev) {
                 calculator.isNegative = false;
             }
             numDisplay.update();
-        } else {
-            calculator.setOperand(calculator.packNumber());
-            calculator.setOperator(ev.target.value);
-        }
+            return;
+        };
+        calculator.setOperand(calculator.packNumber());
+        numDisplay.write(0, calculator.operand);
+    };
+    if (calculator.operand && calculator.operator && calculator.current) {
+        calculator.submitOperation();
+        numDisplay.reset();
     }
+    calculator.setOperator(ev.target.value);
 }
 ``
 function onSubmitClick(ev) {

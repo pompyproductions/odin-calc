@@ -85,33 +85,24 @@ let calculator = {
     },
     setOperand: (val) => {
         calculator.operand = val;
-        calculator.current = [0, -1];
+        calculator.resetCurrent();
     },
     setOperator: (val) => {
-        if (!operand && current === [0, -1]) { // no operand or anything
-            if (val === "-" && !isNegative) {
-                isNegative = true;
-                numDisplay.update();
-            };
-        }
-        // } else if () {
-
-        // }
         calculator.operator = val;
-        // switch (val) {
-        //     case "add":
-        //         document.querySelector(".display-middle").innerHTML = "&plus;";
-        //         break;
-        //     case "subtract":
-        //         document.querySelector(".display-middle").innerHTML = "&minus;";
-        //         break;
-        //     case "multiply":
-        //         document.querySelector(".display-middle").innerHTML = "&times;";
-        //         break;
-        //     case "divide":
-        //         document.querySelector(".display-middle").innerHTML = "&divide;";
-        //         break;
-        // }
+        switch (val) {
+            case "add":
+                numDisplay.container[1].innerHTML = "&plus;";
+                break;
+            case "subtract":
+                numDisplay.container[1].innerHTML = "&minus;";
+                break;
+            case "multiply":
+                numDisplay.container[1].innerHTML = "&times;";
+                break;
+            case "divide":
+                numDisplay.container[1].innerHTML = "&divide;";
+                break;
+        }
     },
     // reset: () => {
     //     currentNumber = 0;
@@ -127,11 +118,15 @@ let calculator = {
         calculator.isNegative = false;
         calculator.zerosAfterDecimalPoint = 0;
     },
-    submitOperation: () => {console.log([
-        calculator.operand,
-        calculator.current,
-        calculator.operator
-    ])},
+    submitOperation: () => {
+        let newOperation = [
+            calculator.operand, 
+            calculator.packNumber(), 
+            calculator.operator
+        ];
+        memory.append(newOperation);
+        numDisplay.write(0, memory.evaluate(newOperation));
+    },
     packNumber: () => {
         let packedNum = calculator.current;
         if (calculator.isNegative) {
