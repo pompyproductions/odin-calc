@@ -49,16 +49,6 @@ let numDisplay = {
         };
         numDisplay.container[id].textContent = txt.replace("-", "–");
     }
-
-    // update: (arr) => {
-    //     if (arr[1] > 0) {
-    //         numDisplay.current.textContent = (arr[0] >= 0) ?
-    //         `${Math.floor(arr[0] / Math.pow(10, arr[1]))}.${arr[0] % Math.pow(10, arr[1])}` :
-    //         `${Math.ceil(arr[0] / Math.pow(10, arr[1]))}.${(arr[0]*-1) % Math.pow(10, arr[1])}`;
-    //     } else {
-    //         numDisplay.current.textContent = `${arr[0]}`;
-    //     }
-    // },
 }
 
 let calculator = {
@@ -129,6 +119,8 @@ let calculator = {
             calculator.setOperand(memory.evaluate(newOperation));
             numDisplay.write(0, calculator.operand);
         } else {
+            calculator.operand = null;
+            calculator.operator = null;
             calculator.unpack(memory.evaluate(newOperation));
         }
     },
@@ -150,13 +142,13 @@ let calculator = {
         // could work some regex magic instead of the following lines
         if (packedNum[1] > -1) {
             calculator.current = Math.floor(Math.abs(packedNum[0]) * Math.pow(10, packedNum[1]));
-            calculator.decimalPoint = packedNum[1]; 
+            calculator.decimalPoint = packedNum[1] === 0 ? -1 : packedNum[1]; 
         } else {
             calculator.current = Math.abs(packedNum[0]) * Math.pow(10, PRECISION);
             calculator.decimalPoint = PRECISION;
         }
-
         if (packedNum[0] < 0) calculator.isNegative = true;
-
+        calculator.zerosAfterDecimalPoint = operations.countZerosAfterPoint(packedNum[0]);
+        numDisplay.update();
     }
 }
