@@ -1,10 +1,23 @@
 console.log("operations.js: flotation device");
 
 const operations = {
-    add: (x, y) => [x[0] + y[0], Math.max(x[1], y[1])],
-    subtract: (x, y) => x-y,
-    multiply: (x, y) => x*y,
-    divide: (x, y) => y === 0 ? "ERR01" : (x/y), // catch error and display on calculator AND verbose
+    add: (x, y) => {
+        let result = x[0] + y[0];
+        return [result, operations.countDecimalPlaces(result)];
+    },
+    subtract: (x, y) => {
+        let result = x[0] - y[0];
+        return [result, operations.countDecimalPlaces(result)];
+    },
+    multiply: (x, y) => {
+        let result = x[0] * y[0];
+        return [result, operations.countDecimalPlaces(result)];
+    },
+    divide: (x, y) => {
+        let result = x[0] / y[0];
+        return [result, PRECISION];
+    },
+    // divide: (x, y) => y === 0 ? "ERR01" : (x/y),
 
     countDecimalPlaces: (x) => {
         let str = x.toString();
