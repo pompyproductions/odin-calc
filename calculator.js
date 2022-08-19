@@ -39,6 +39,15 @@ let numDisplay = {
     reset: () => {
         numDisplay.container.forEach(elem => {elem.textContent = "";});
         numDisplay.focus(1);
+    },
+    write: (id, val) => {
+        let txt;
+        if (val[1] === -1) {
+            txt = val[0].toString();
+        } else {
+            txt = val[0].toFixed(val[1]);
+        };
+        numDisplay.container[id].textContent = txt.replace("-", "–");
     }
 
     // update: (arr) => {
@@ -104,13 +113,19 @@ let calculator = {
         //         break;
         // }
     },
-    reset: () => {
-        currentNumber = 0;
-        currentOperation = null;
-        firstOperand = null;
+    // reset: () => {
+    //     currentNumber = 0;
+    //     currentOperation = null;
+    //     firstOperand = null;
         
-        memory.reset();
-        updateDisplay();
+    //     memory.reset();
+    //     updateDisplay();
+    // },
+    resetCurrent: () => {
+        calculator.current = 0;
+        calculator.decimalPoint = -1;
+        calculator.isNegative = false;
+        calculator.zerosAfterDecimalPoint = 0;
     },
     submitOperation: () => {console.log([
         calculator.operand,

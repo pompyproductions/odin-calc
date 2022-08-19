@@ -31,18 +31,18 @@ function onDigitClick(ev) {
 function onOperatorClick(ev) {
     // can definitely write the conditionals better
     console.log(ev.target);
-    if (!calculator.operand && !calculator.current) {
-        if (ev.target.value === "subtract") {
-            calculator.isNegative = true;
+    if (!calculator.operand) {
+        if (!calculator.current) {
+            if (ev.target.value === "subtract") {
+                calculator.isNegative = true;
+            } else if (ev.target.value === "add") {
+                calculator.isNegative = false;
+            }
             numDisplay.update();
-        } else if (ev.target.value === "add") {
-            calculator.isNegative = false;
-            numDisplay.update();
-        };
-    } else if (!calculator.operand && calculator.current) {
-        calculator.setOperand(calculator.current); // could transfer into setOperator without parameter
-        calculator.setOperator(ev.target.value);
-        // adjust the displays here
+        } else {
+            calculator.setOperand(calculator.packNumber());
+            calculator.setOperator(ev.target.value);
+        }
     }
 }
 ``
