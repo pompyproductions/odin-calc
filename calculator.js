@@ -94,7 +94,7 @@ let calculator = {
                 break;
         }
     },
-    // reset: () => {
+    // resetAll: () => {
     //     currentNumber = 0;
     //     currentOperation = null;
     //     firstOperand = null;
@@ -115,6 +115,7 @@ let calculator = {
             calculator.operator
         ];
         memory.append(newOperation);
+        verboseDisplay.append(newOperation);
         if (isOperatorPressed) {
             calculator.setOperand(memory.evaluate(newOperation));
             numDisplay.write(0, calculator.operand);

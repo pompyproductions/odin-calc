@@ -29,12 +29,10 @@ function onDigitClick(ev) {
     }
     calculator.append(Number(ev.target.value));
     numDisplay.update();
-    console.log(calculator);
 }
 
 function onOperatorClick(ev) {
     // can definitely write the conditionals better
-    console.log(ev.target);
     if (!calculator.operand) {
         if (!calculator.current) {
             if (ev.target.value === "subtract") {
