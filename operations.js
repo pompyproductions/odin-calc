@@ -1,7 +1,7 @@
 console.log("operations.js: flotation device");
 
 const operations = {
-    add: (x, y) => x+y,
+    add: (x, y) => [x[0] + y[0], Math.max(x[1], y[1])],
     subtract: (x, y) => x-y,
     multiply: (x, y) => x*y,
     divide: (x, y) => y === 0 ? "ERR01" : (x/y) // catch error and display on calculator AND verbose

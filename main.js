@@ -44,12 +44,13 @@ function onOperatorClick(ev) {
             numDisplay.update();
             return;
         };
-        calculator.setOperand(calculator.packNumber());
+        calculator.setOperand(calculator.pack());
         numDisplay.write(0, calculator.operand);
     };
     if (calculator.operand && calculator.operator && calculator.current) {
-        calculator.submitOperation();
         numDisplay.reset();
+        calculator.submitOperation();
+
     }
     calculator.setOperator(ev.target.value);
 }

@@ -121,13 +121,13 @@ let calculator = {
     submitOperation: () => {
         let newOperation = [
             calculator.operand, 
-            calculator.packNumber(), 
+            calculator.pack(), 
             calculator.operator
         ];
         memory.append(newOperation);
         numDisplay.write(0, memory.evaluate(newOperation));
     },
-    packNumber: () => {
+    pack: () => {
         let packedNum = calculator.current;
         if (calculator.isNegative) {
             packedNum *= -1
