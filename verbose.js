@@ -3,7 +3,7 @@
 const verboseDisplay = {
     container: document.querySelector(".verbose-display"),
     
-    switchFocus: (node) => {
+    focus: (node) => {
         [...verboseDisplay.container.children].forEach((item) => {
             item.classList.remove("latest")});
         node.classList.add("latest");
@@ -34,7 +34,7 @@ const verboseDisplay = {
         newElem.textContent = `${first} ${verb} ${arr[1][0]}`;
         newElem.classList.add("verbose-element");
         verboseDisplay.container.appendChild(newElem);
-        verboseDisplay.switchFocus(newElem);
+        verboseDisplay.focus(newElem);
         newElem.addEventListener("click", onVerboseClick);
         return newElem;
     },
@@ -52,18 +52,21 @@ const verboseDisplay = {
 
 const onVerboseClick = (event) => {
     let id = [...verboseDisplay.container.children].indexOf(event.target);
-
     memory.rollback(id);
     verboseDisplay.regen();
-    verboseDisplay.switchFocus(verboseDisplay.container.children.item(id));
+    verboseDisplay.focus(verboseDisplay.container.children.item(id));
 
-    console.log(memory.evaluate(memory.history[id]));
-    currentNumber = memory.evaluate(memory.history[id]);
-    currentOperation = null;
-    firstOperand = null;
-    resetDisplay();
-    updateDisplay();
-    willReset = true;
+    numDisplay.reset();
+    numDisplay.focus(2);
+    calculator.unpack(memory.history[id][1]);
+    
+    calculator.operand = memory.history[id][0];
+    numDisplay.write(0, memory.history[id][0]);
+    calculator.setOperator(memory.history[id][2]);
+
+    // resetDisplay();
+    // updateDisplay();
+    // willReset = true;
     
 };
 
