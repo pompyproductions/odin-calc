@@ -1,6 +1,6 @@
 console.log("main.js: flotation device");
 
-const inputs = {
+const INPUTS = {
     "+": "add",
     "-": "subtract",
     "*": "multiply",
@@ -9,6 +9,7 @@ const inputs = {
     "Escape": "button-reset",
     ".": "button-decimal",
 }
+const PRECISION = 6;
 
 // function areArraysEqual(arr1, arr2) {
 //     if (arr1.length !== arr2.length) return false;
@@ -49,14 +50,17 @@ function onOperatorClick(ev) {
     };
     if (calculator.operand && calculator.operator && calculator.current) {
         numDisplay.reset();
-        calculator.submitOperation();
-
+        calculator.submitOperation(true);
     }
     calculator.setOperator(ev.target.value);
 }
 ``
 function onSubmitClick(ev) {
-    console.log(ev.target);
+    if (calculator.operand && calculator.operator && calculator.current) {
+        numDisplay.reset();
+        calculator.submitOperation(false);
+        numDisplay.focus(1);
+    }
 }
 
 function onResetClick(ev) {
@@ -104,15 +108,15 @@ document.addEventListener('keydown', (event) => {
             .click();
     } else if ("+-*/".includes(event.key)) {
         document.querySelector(".operators")
-            .querySelector(`[value="${inputs[event.key]}"]`)
+            .querySelector(`[value="${INPUTS[event.key]}"]`)
             .click();
     } else if (["Enter", "Escape"].includes(event.key)) {
         document.querySelector(".others")
-            .querySelector(`#${inputs[event.key]}`)
+            .querySelector(`#${INPUTS[event.key]}`)
             .click();
     } else if (".,".includes(event.key)) {
         document.querySelector(".numbers")
-            .querySelector(`#${inputs[event.key]}`)
+            .querySelector(`#${INPUTS[event.key]}`)
             .click();
     }
 });

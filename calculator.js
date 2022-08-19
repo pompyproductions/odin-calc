@@ -118,14 +118,19 @@ let calculator = {
         calculator.isNegative = false;
         calculator.zerosAfterDecimalPoint = 0;
     },
-    submitOperation: () => {
+    submitOperation: (isOperatorPressed) => {
         let newOperation = [
             calculator.operand, 
             calculator.pack(), 
             calculator.operator
         ];
         memory.append(newOperation);
-        numDisplay.write(0, memory.evaluate(newOperation));
+        if (isOperatorPressed) {
+            calculator.setOperand(memory.evaluate(newOperation));
+            numDisplay.write(0, calculator.operand);
+        } else {
+            calculator.unpack(memory.evaluate(newOperation));
+        }
     },
     pack: () => {
         let packedNum = calculator.current;
@@ -139,5 +144,19 @@ let calculator = {
             packedNum,
             calculator.decimalPoint === -1 ? 0 : calculator.decimalPoint
         ]
+    },
+    unpack: (packedNum) => {
+        calculator.resetCurrent();
+        // could work some regex magic instead of the following lines
+        if (packedNum[1] > -1) {
+            calculator.current = Math.floor(Math.abs(packedNum[0]) * Math.pow(10, packedNum[1]));
+            calculator.decimalPoint = packedNum[1]; 
+        } else {
+            calculator.current = Math.abs(packedNum[0]) * Math.pow(10, PRECISION);
+            calculator.decimalPoint = PRECISION;
+        }
+
+        if (packedNum[0] < 0) calculator.isNegative = true;
+
     }
 }
