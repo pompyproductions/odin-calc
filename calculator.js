@@ -65,6 +65,10 @@ let calculator = {
 
 
     append: (digit) => {
+        if (calculator.willReset) {
+            calculator.resetCurrent();
+            calculator.willReset = false;
+        }
         calculator.current = calculator.current * 10 + digit;
         if (calculator.decimalPoint !== -1) {
             calculator.decimalPoint++;
@@ -122,7 +126,8 @@ let calculator = {
         } else {
             calculator.operand = null;
             calculator.operator = null;
-            calculator.unpack(memory.evaluate(newOperation));
+            calculator.unpack(memory.evaluate(newOperation))
+            calculator.willReset = true;
         }
     },
     pack: () => {
