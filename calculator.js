@@ -113,7 +113,7 @@ let calculator = {
         calculator.zerosAfterDecimalPoint = 0;
     },
     submitOperation: (isOperatorPressed) => {
-        let newOperation = [
+        let newOperation = [ // operation obj: operand1, operand2, operator
             calculator.operand, 
             calculator.pack(), 
             calculator.operator
@@ -126,7 +126,7 @@ let calculator = {
         } else {
             calculator.operand = null;
             calculator.operator = null;
-            calculator.unpack(memory.evaluate(newOperation))
+            calculator.unpack(memory.evaluate(newOperation));
             calculator.willReset = true;
         }
     },

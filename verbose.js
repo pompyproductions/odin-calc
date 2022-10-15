@@ -30,13 +30,21 @@ const verboseDisplay = {
             first = "..."
         };
 
-        let newElem = document.createElement("p");
-        newElem.textContent = `${first} ${verb} ${arr[1][0]}`;
-        newElem.classList.add("verbose-element");
-        verboseDisplay.container.appendChild(newElem);
-        verboseDisplay.focus(newElem);
-        newElem.addEventListener("click", onVerboseClick);
-        return newElem;
+        let newElementContainer = document.createElement("div");
+        newElementContainer.classList.add("verbose-element");
+        
+        let newElementText = document.createElement("p");
+        newElementText.textContent = `${first} ${verb} ${arr[1][0]}`;
+        newElementContainer.appendChild(newElementText);
+        
+        newElementText = document.createElement("p");
+        newElementText.textContent = `[${memory.evaluate(arr)}]`;
+        newElementContainer.appendChild(newElementText);
+        
+        verboseDisplay.container.appendChild(newElementContainer);
+        verboseDisplay.focus(newElementContainer);
+        newElementContainer.addEventListener("click", onVerboseClick);
+        return newElementContainer;
     },
     
     regen: () => {
